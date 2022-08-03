@@ -89,6 +89,10 @@ end
 
 get '/products' do
   # PRODUCTS PAGE LISTING ALL THE PRODUCTS
+  DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos']
+  LOCATIONS = ['canada', 'england', 'france', 'ireland', 'mexico', 'scotland', 'taiwan', 'us']
+  PRODUCTS = []
+  # PRODUCTS PAGE LISTING ALL THE PRODUCTS
   erb "<!DOCTYPE html>
   <html>
   <head>
@@ -107,28 +111,24 @@ get '/products' do
         <a href='/products' class='nav'>Products</a>
       </div>
 
-      <% DATA = HTTParty.get('https://fomotograph-api.udacity.com/products.json')['photos'] %>
-
       <div id='main'>
-        <h1> All Products </h1>
+        <h1>All Products</h1>
         <div id='wrapper'>
-
-          <% LOCATIONS = ['canada', 'england', 'france', 'ireland', 'mexico', 'scotland', 'taiwan', 'us'] %>
-
+        
           <% LOCATIONS.each do |location| %>
-          <a href='/products/location/<%= location %>'>
-          <div class='product'>
-            <div class='thumb'>
-              <img src='<%= DATA.select { |product| product['location'] == location }.sample['url'] %>' />
+            <a href='/products/location/<%= location %>'>
+            <div class='product'>
+              <div class='thumb'>
+                <img src='<%= DATA.select { |product| product['location'] == location }.sample['url'] %>' />
+              </div>
+              <div class='caption'>
+                <%= location != 'us' ? location.capitalize : location.upcase %>
+              </div>
             </div>
-            <div class='caption'>
-              <%= location != 'us' ? location.capitalize : location.upcase %>
-            </div>
-          </div>
-          </a>
-          <% end %>
+            </a>
+            <% end %>
 
-        </div>
+          </div>
       </div>
 
       <div id='footer'>
