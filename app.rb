@@ -1,6 +1,5 @@
 require 'sinatra'
-require 'HTTParty'
-require 'json'
+require 'models/product.rs'
 
 get '/' do
   # HOME LANDING PAGE SHOWING BANNER PHOTO, TITLE, AND SUBTITLE
