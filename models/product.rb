@@ -34,4 +34,15 @@ class Product
     end
     return @products
   end
+
+  # returns an array of products from a given location
+  def self.find_by_location(location)
+    self.all.select { |product| product.location == location}
+  end
+
+  # returns a Product with a particular id
+  def self.find_by_id(id)
+    self.all.find { |product| product.id == id }
+  end
+
 end
