@@ -39,3 +39,11 @@ get '/team' do
   @page_title = "The Team"
   erb :team
 end
+
+get '/deals' do
+  # PAGE DISPLAYING PRODUCT UNDER $10
+  @limit = 10
+  @products = Product.under(@limit)
+  @page_title = "Deals under $#{@limit}"
+  erb :category
+end

@@ -44,5 +44,9 @@ class Product
   def self.find_by_id(id)
     self.all.find { |product| product.id == id }
   end
+  
+  def self.under(limit)
+    self.all.select { |product| product.price < limit }
+  end
 
 end
